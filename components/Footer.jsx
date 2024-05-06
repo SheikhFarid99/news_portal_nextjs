@@ -3,6 +3,9 @@ import Image from "next/image";
 import logo from "../assets/logo.png";
 import Link from "next/link";
 import Category from "./Category";
+import { FaFacebookF } from "react-icons/fa";
+import { AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
+
 const Footer = () => {
   return (
     <div className="w-full">
@@ -60,7 +63,7 @@ const Footer = () => {
             </div>
             <div className="grid grid-cols-1 gap-y-4 pt-3">
               {[1, 2, 3, 4].map((r, i) => (
-                <Link key={i} href={"#"} className="flex gap-x-2">
+                <Link key={i} href={"#"} className="flex w-full">
                   <div className="group relative overflow-hidden w-[90px] h-[75px]">
                     <div className="w-[90px] h-[75px] block group-hover:scale-[1.1] transition-all duration-[1s]">
                       <Image
@@ -77,13 +80,15 @@ const Footer = () => {
                       ></div>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-y-1">
-                    <h2 className="text-sm font-semibold text-white hover:text-[#c80000]">
-                      Dawid Malan The consistent one among freaks
-                    </h2>
-                    <div className="flex gap-x-2 text-xs font-normal text-white">
-                      <span>October 6, 2023</span>
-                      <span>Anamul Islam</span>
+                  <div className="w-[calc(100%-90px)] pl-2">
+                    <div className="flex flex-col gap-y-1">
+                      <h2 className="text-sm font-semibold text-white hover:text-[#c80000]">
+                        Dawid Malan The consistent one among freaks
+                      </h2>
+                      <div className="flex gap-x-2 text-xs font-normal text-white">
+                        <span>October 6, 2023</span>
+                        <span>Anamul Islam</span>
+                      </div>
                     </div>
                   </div>
                 </Link>
@@ -92,7 +97,34 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div></div>
+      <div className="bg-[#262323]">
+        <div className="px-4 md:px-8 py-5 flex flex-col md:flex-row gap-3 justify-between items-center">
+          <div className="flex gap-y-2 text-gray-400 justify-start items-center">
+            <span>Copyright © 2023</span>
+            <Link href={"#"}>Learn with Project</Link>
+          </div>
+          <div className="flex gap-x-[4px]">
+            <a
+              className="w-[37px] h-[35px] text-white flex justify-center items-center bg-[#ffffff2b]"
+              href="#"
+            >
+              <FaFacebookF />
+            </a>
+            <a
+              className="w-[37px] text-white h-[35px] flex justify-center items-center bg-[#ffffff2b]"
+              href="#"
+            >
+              <AiOutlineTwitter />
+            </a>
+            <a
+              className="w-[37px] text-white h-[35px] flex justify-center items-center bg-[#ffffff2b]"
+              href="#"
+            >
+              <AiFillYoutube />
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
