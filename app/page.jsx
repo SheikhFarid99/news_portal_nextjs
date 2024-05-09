@@ -8,8 +8,17 @@ import PopularNews from "@/components/news/PopularNews";
 import SimpleNewsCard from "@/components/news/items/SimpleNewsCard";
 import NewsCard from "@/components/news/items/NewsCard";
 import Footer from "@/components/Footer";
+import { base_api_url } from "@/config/config";
 
-export default function Home() {
+const Home = async () => {
+  const news_data = await fetch(`${base_api_url}/api/all/news`, {
+    next: {
+      revalidate: 5,
+    },
+  });
+
+  const { news } = await news_data?.json();
+
   return (
     <div>
       <main>
@@ -24,58 +33,76 @@ export default function Home() {
                 <div className="flex w-full flex-col gap-y-[14px] pl-0 lg:pl-2">
                   <Title title="Technology" />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px]">
-                    {[1, 2, 3, 4].map((item, i) => (
-                      <SimpleNewsCard item={item} key={i} />
-                    ))}
+                    {news["Technology"].map((item, i) => {
+                      if (i < 4) {
+                        return <SimpleNewsCard item={item} key={i} />;
+                      }
+                    })}
                   </div>
                 </div>
               </div>
             </div>
             <PopularNews type="Popular news" />
+            {/* first section */}
             <div className="w-full">
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-8/12">
-                  <DetailsNewsRow category="Sports" type="details-news" />
-                  <DetailsNews />
+                  <DetailsNewsRow
+                    news={news["Sports"]}
+                    category="Sports"
+                    type="details-news"
+                  />
+                  <DetailsNews news={news["Health"]} />
                 </div>
                 <div className="w-full lg:w-4/12">
-                  <DetailsNewsCol />
+                  <DetailsNewsCol
+                    news={news["Education"]}
+                    category="Education"
+                  />
                 </div>
               </div>
             </div>
-
+            {/* 2nd section */}
             <div className="w-full">
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-4/12">
                   <div className="pr-2">
-                    <DetailsNewsCol />
+                    <DetailsNewsCol
+                      news={news["Politics"]}
+                      category="Politics"
+                    />
                   </div>
                 </div>
                 <div className="w-full lg:w-8/12">
                   <div className="pl-2">
-                    <DetailsNewsRow category="Sports" type="details-news" />
-                    <DetailsNews />
+                    <DetailsNewsRow
+                      news={news["Travel"]}
+                      category="Travel"
+                      type="details-news"
+                    />
+                    <DetailsNews news={news["International"]} category="International" />
                   </div>
                 </div>
               </div>
             </div>
-
+            {/* 3rd section */}
             <div className="w-full">
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-8/12">
-                  {/* <div className="pr-2">
-                  <DetailsNewsCol />
-                </div> */}
                   <div>
-                    <DetailsNewsRow category="Sports" type="details-news" />
+                    <DetailsNewsRow
+                      news={news["Technology"]}
+                      category="Technology"
+                      type="details-news"
+                    />
                   </div>
                 </div>
                 <div className="w-full lg:w-4/12">
                   <div className="pl-2">
                     <Title title="Recent news" />
                     <div className="grid grid-cols-1 gap-y-[14px] mt-4">
-                      {[1, 2, 3, 4].map((_, i) => (
-                        <NewsCard key={i} />
+                      {news['Sports'].map((item, i) => (
+                        <NewsCard item={item} key={i} />
                       ))}
                     </div>
                   </div>
@@ -85,7 +112,8 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
-}
+};
+export default Home;
