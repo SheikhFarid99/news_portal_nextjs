@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const NewsCard = ({item}) => {
-  console.log(item?.category)
+ 
   return (
     <div className="bg-white shadow flex gap-x-2 p-4">
       <div className="relative group overflow-hidden h-full">
@@ -21,7 +21,7 @@ const NewsCard = ({item}) => {
       </div>
       <div className="flex flex-col gap-y-1">
         <Link href={`/news/category/${ item?.category}`} className="text-sm font-semibold text-[#c80000]">
-          Sports
+          {item?.category}
         </Link>
         <Link
           href={`/news/${ item?.slug}`}

@@ -5,7 +5,7 @@ import 'react-multi-carousel/lib/styles.css';
 import SimpleNewsCard from './items/SimpleNewsCard';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
-const LatestNews = () => {
+const LatestNews = ({news}) => {
 
     const responsive = {
 
@@ -54,7 +54,7 @@ const LatestNews = () => {
                 transitionDuration={500}
             >
                 {
-                    [1, 2, 3, 4, 5, 6].map((item, i) => <SimpleNewsCard item={item} key={i} type='latest' />)
+                    news.map((item, i) => <SimpleNewsCard item={item} key={i} type='latest' />)
                 }
             </Carousel>
         </div>

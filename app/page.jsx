@@ -17,8 +17,10 @@ const Home = async () => {
     },
   });
 
-  const { news } = await news_data?.json();
-
+  let news = await news_data?.json();
+  console.log(news)
+  news = news.news
+  
   return (
     <div>
       <main>
@@ -27,7 +29,7 @@ const Home = async () => {
           <div className="px-4 md:px-8 py-8">
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12">
-                <LatestNews />
+                <LatestNews news={news["Education"]} />
               </div>
               <div className="w-full lg:w-6/12 mt-5 lg:mt-0">
                 <div className="flex w-full flex-col gap-y-[14px] pl-0 lg:pl-2">
@@ -42,7 +44,7 @@ const Home = async () => {
                 </div>
               </div>
             </div>
-            <PopularNews type="Popular news" />
+            <PopularNews type="Popular news"  news={news["Travel"]} />
             {/* first section */}
             <div className="w-full">
               <div className="flex flex-wrap">
@@ -52,7 +54,8 @@ const Home = async () => {
                     category="Sports"
                     type="details-news"
                   />
-                  <DetailsNews news={news["Health"]} />
+                  <DetailsNews news={news["Health"]}
+                    category="Health"  />
                 </div>
                 <div className="w-full lg:w-4/12">
                   <DetailsNewsCol
@@ -66,12 +69,14 @@ const Home = async () => {
             <div className="w-full">
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-4/12">
-                  <div className="pr-2">
+                  {
+                    <div className="pr-2">
                     <DetailsNewsCol
-                      news={news["Politics"]}
+                      news={news["Education"]}
                       category="Politics"
                     />
                   </div>
+                  }
                 </div>
                 <div className="w-full lg:w-8/12">
                   <div className="pl-2">
@@ -80,7 +85,9 @@ const Home = async () => {
                       category="Travel"
                       type="details-news"
                     />
-                    <DetailsNews news={news["International"]} category="International" />
+                    <DetailsNews news={news["Education"]}
+                    category="International
+                    " />
                   </div>
                 </div>
               </div>

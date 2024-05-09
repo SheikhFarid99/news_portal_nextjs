@@ -23,7 +23,7 @@ const CategoryNews = ({ params }) => {
               <div className="w-full pr-0 xl:pr-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {[1, 2, 3, 4, 5, 6].map((news, i) => (
-                    <SimpleDetailsNewCard type="details-news" height={200} />
+                    <SimpleDetailsNewCard news={{}} type="details-news" height={200} />
                   ))}
                 </div>
               </div>
