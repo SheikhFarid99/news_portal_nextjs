@@ -18,13 +18,13 @@ const Home = async () => {
   });
 
   let news = await news_data?.json();
-  console.log(news)
+
   news = news.news
   
   return (
     <div>
       <main>
-        <HeadLines />
+        <HeadLines news={news} />
         <div className="bg-slate-100">
           <div className="px-4 md:px-8 py-8">
             <div className="flex flex-wrap">

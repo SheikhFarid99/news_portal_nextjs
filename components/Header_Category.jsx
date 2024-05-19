@@ -1,42 +1,32 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { IoClose } from 'react-icons/io5'
 import { BsList } from 'react-icons/bs'
+import { base_api_url } from '../config/config'
 
 const Header_Category = () => {
 
     const path = usePathname()
 
-    const data = [
-        {
-            id: 1,
-            name: 'Sports',
+    const [categories,set_categories] = useState([])
 
-        },
-        {
-            id: 2,
-            name: 'Travel',
 
-        },
-        {
-            id: 3,
-            name: 'Sports',
-
-        },
-        {
-            id: 4,
-            name: 'Sports',
-
-        },
-        {
-            id: 5,
-            name: 'Sports',
-
+    const get_categories = async () => {
+        try {
+            const res = await fetch(`${base_api_url}/api/category/all`)
+            const data = await res.json()
+            set_categories(data.categories)
+        } catch (error) {
+            console.log(error)
         }
-    ]
+    }
+
+    useEffect(() => {
+        get_categories()
+    }, [])
 
     const [show, setShow] = useState(false)
     const [cate_show, set_cate_show] = useState(false)
@@ -50,7 +40,7 @@ const Header_Category = () => {
                     <div className='flex-wrap hidden lg:flex'>
                         <Link className={`px-6 font-medium py-[13px] ${path === '/' ? 'bg-[#00000026]' : ''}`} href={'/'} >Home</Link>
                         {
-                            data.map((c, i) => <Link key={c.id} className={`px-6 font-medium py-[13px] ${path === c.name ? 'bg-[#00000026]' : ''}`} href={'/'} >{c.name}</Link>)
+                          categories.length>0 &&  categories.map((c, i) => <Link key={i} className={`px-6 font-medium py-[13px] ${path === c.category ? 'bg-[#00000026]' : ''}`} href={`/news/category/${c.category}`} >{c.category}</Link>)
                         }
                     </div>
                     <div className='h-full w-[48px]'>
