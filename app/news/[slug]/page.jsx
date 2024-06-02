@@ -1,14 +1,22 @@
 import Breadcrumb from "@/components/Breadcrumb";
 import Category from "@/components/Category";
+import Footer from "@/components/Footer";
 import Search from "@/components/Search";
 import Title from "@/components/Title";
 import PopularNews from "@/components/news/PopularNews";
 import NewsCard from "@/components/news/items/NewsCard";
 import SimpleDetailsNewCard from "@/components/news/items/SimpleDetailsNewCard";
 import React from "react";
+import htmlParser from 'react-html-parser'
+import { base_api_url } from '../../../config/config'
 
-const Details = ({ params }) => {
+const Details = async ({ params }) => {
+
   const { slug } = params;
+
+  const res = await fetch(`${base_api_url}/api/news/details/${slug}`)
+  const { news } = await res.json()
+
   return (
     <div>
       <div className="bg-white shadow-sm py-4">
@@ -21,10 +29,17 @@ const Details = ({ params }) => {
           <div className="flex flex-wrap">
             <div className="w-full xl:w-8/12">
               <div className="w-full pr-0 xl:pr-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {[1, 2, 3, 4, 5, 6].map((news, i) => (
-                    <SimpleDetailsNewCard news={{}} type="details-news" height={200} />
-                  ))}
+                <div className="flex flex-col gap-y-5 bg-white">
+                  <img src={news.image} alt="" />
+                  <div className="flex flex-col gap-y-4 px-6 pb-6">
+                    <h3 className="text-red-700 uppercase font-medium text-xl">{news.category}</h3>
+                    <h2 className="text-3xl text-gray-700 font-bold">{news.title}</h2>
+                    <div className="flex gap-x-2 text-xs font-normal text-slate-600">
+                      <span>{news?.date}/</span>
+                      <span>{news?.writerName}</span>
+                    </div>
+                    <p>{htmlParser(news.description)}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -50,10 +65,11 @@ const Details = ({ params }) => {
             </div>
           </div>
           <div className="pt-8">
-            <PopularNews type="Related news" />
+            {/* <PopularNews type="Related news" /> */}
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

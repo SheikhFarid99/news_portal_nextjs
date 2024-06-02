@@ -11,7 +11,7 @@ const Header_Category = () => {
 
     const path = usePathname()
 
-    const [categories,set_categories] = useState([])
+    const [categories, set_categories] = useState([])
 
 
     const get_categories = async () => {
@@ -40,7 +40,7 @@ const Header_Category = () => {
                     <div className='flex-wrap hidden lg:flex'>
                         <Link className={`px-6 font-medium py-[13px] ${path === '/' ? 'bg-[#00000026]' : ''}`} href={'/'} >Home</Link>
                         {
-                          categories.length>0 &&  categories.map((c, i) => <Link key={i} className={`px-6 font-medium py-[13px] ${path === c.category ? 'bg-[#00000026]' : ''}`} href={`/news/category/${c.category}`} >{c.category}</Link>)
+                            categories.length > 0 && categories.map((c, i) => <Link key={i} className={`px-6 font-medium py-[13px] ${path === c.category ? 'bg-[#00000026]' : ''}`} href={`/news/category/${c.category}`} >{c.category}</Link>)
                         }
                     </div>
                     <div className='h-full w-[48px]'>
