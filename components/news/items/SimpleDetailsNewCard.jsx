@@ -36,7 +36,7 @@ const SimpleDetailsNewCard = ({news, type, height }) => {
       <div className="p-5">
         <Link
           className="text-[15px] font-semibold text-[#333333] hover:text-[#c80000]"
-          href={`/news/${news?.title}`}
+          href={`/news/${news?.slug}`}
         >
           {news?.title}
         </Link>
