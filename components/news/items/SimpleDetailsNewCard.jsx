@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 const { convert } = require('html-to-text');
 
-const SimpleDetailsNewCard = ({news, type, height }) => {
+const SimpleDetailsNewCard = ({ news, type, height }) => {
   return (
     <div className="bg-white shadow">
       <div className="group relative overflow-hidden">
@@ -22,7 +22,7 @@ const SimpleDetailsNewCard = ({news, type, height }) => {
         </div>
         <div
           className="w-full h-full block absolute left-0 top-0 invisible group-hover:visible bg-white cursor-pointer opacity-5 transition-all duration-300"
-         
+
         ></div>
         <div className="left-5 absolute bottom-4 flex justify-start items-start gap-x-2 text-white font-semibold gap-y-2">
           <div className="px-[6px] py-[2px] rounded-sm text-[13px] bg-[#c80000]">
@@ -47,8 +47,8 @@ const SimpleDetailsNewCard = ({news, type, height }) => {
         {type === "details-news" && (
           <p className="text-sm text-slate-600 pt-3">
             {
-              convert(news?.description).slice(0,200)
-              
+              convert(news?.description).slice(0, 200)
+
             }
           </p>
         )}

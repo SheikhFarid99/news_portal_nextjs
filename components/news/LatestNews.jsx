@@ -1,12 +1,14 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import SimpleNewsCard from './items/SimpleNewsCard';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { base_api_url } from '@/config/config';
 
-const LatestNews = ({news}) => {
+const LatestNews = () => {
 
+    const [news, setNews] = useState([])
     const responsive = {
 
         superLargeDesktop: {
@@ -26,6 +28,20 @@ const LatestNews = ({news}) => {
             items: 1
         }
     };
+
+    const latest_news_get = async () => {
+        try {
+            const res = await fetch(`${base_api_url}/api/latest/news`)
+            const data = await res.json()
+            setNews(data.news)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        latest_news_get()
+    }, [])
 
     const ButtonGroup = ({ next, previous }) => {
         return <div className='flex justify-between items-center'>
