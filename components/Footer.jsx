@@ -6,6 +6,7 @@ import Category from "./Category";
 import { FaFacebookF } from "react-icons/fa";
 import { AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
 import Gallery from "./news/Gallery";
+import RecentNewsFooter from "./news/RecentNewsFooter";
 
 const Footer = () => {
   return (
@@ -40,44 +41,7 @@ const Footer = () => {
           <div>
             <Category categories={[]} titleStyle="text-white" />
           </div>
-          <div className="w-full flex flex-col gap-y-[14px]">
-            <div className="text-xl font-bold text-white relative before:absolute before:w-[4px] before:bg-[#c80000] before:h-full before:-left-0 pl-3">
-              Recent news
-            </div>
-            <div className="grid grid-cols-1 gap-y-4 pt-3">
-              {[1, 2, 3, 4].map((r, i) => (
-                <Link key={i} href={"#"} className="flex w-full">
-                  <div className="group relative overflow-hidden w-[90px] h-[75px]">
-                    <div className="w-[90px] h-[75px] block group-hover:scale-[1.1] transition-all duration-[1s]">
-                      <Image
-                        className=""
-                        layout="fill"
-                        src={
-                          "https://res.cloudinary.com/dpj4vsqbo/image/upload/v1696951679/news/btbfqrvjqhso6n842reb.jpg"
-                        }
-                        alt="images"
-                      />
-                      <div
-                        className="w-full h-full block absolute left-0 top-0 invisible group-hover:visible bg-white cursor-pointer opacity-5 transition-all duration-300"
-                        href={"#"}
-                      ></div>
-                    </div>
-                  </div>
-                  <div className="w-[calc(100%-90px)] pl-2">
-                    <div className="flex flex-col gap-y-1">
-                      <h2 className="text-sm font-semibold text-white hover:text-[#c80000]">
-                        Dawid Malan The consistent one among freaks
-                      </h2>
-                      <div className="flex gap-x-2 text-xs font-normal text-white">
-                        <span>October 6, 2023</span>
-                        <span>Anamul Islam</span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+          <RecentNewsFooter />
         </div>
       </div>
       <div className="bg-[#262323]">

@@ -10,6 +10,7 @@ import React from "react";
 import htmlParser from 'react-html-parser'
 import { base_api_url } from '../../../config/config'
 import RelatedNews from "@/components/news/RelatedNews";
+import RecentNews from "@/components/news/RecentNews";
 
 const Details = async ({ params }) => {
 
@@ -52,16 +53,7 @@ const Details = async ({ params }) => {
               <div className="w-full pl-0 xl:pl-4">
                 <div className="flex flex-col gap-y-8">
                   <Search />
-                  <div className="w-full flex flex-col gap-y-[14px] bg-white pt-4">
-                    <div className="pl-4">
-                      <Title title="Recent news" />
-                    </div>
-                    <div className="grid grid-cols-1 gap-y-3">
-                      {[1, 2, 3, 4, 5, 6].map((news, i) => (
-                        <NewsCard />
-                      ))}
-                    </div>
-                  </div>
+                  <RecentNews />
                   <div className="p-4 bg-white">
                     <Category titleStyle={"text-gray-700 font-bold"} />
                   </div>
