@@ -24,7 +24,7 @@ const Category = async ({ titleStyle }) => {
       >
         {categories && categories.length > 0 && categories.map((item, i) => (
           <li className="list-none" key={i}>
-            <Link href="#">{item.category} ({item.count})</Link>
+            <Link href={`/news/category/${item.category}`}>{item.category} ({item.count})</Link>
           </li>
         ))}
       </div>
