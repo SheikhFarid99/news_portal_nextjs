@@ -6,10 +6,13 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { IoClose } from 'react-icons/io5'
 import { BsList } from 'react-icons/bs'
 import { base_api_url } from '../config/config'
+import { useRouter } from 'next/navigation'
 
 const Header_Category = () => {
 
+    const router = useRouter()
     const path = usePathname()
+    const [state, setState] = useState('')
 
     const [categories, set_categories] = useState([])
 
@@ -30,6 +33,13 @@ const Header_Category = () => {
 
     const [show, setShow] = useState(false)
     const [cate_show, set_cate_show] = useState(false)
+
+    const search = (e) => {
+        e.preventDefault()
+        router.push(`/search/news?value=${state}`)
+        setState('')
+        setShow(false)
+    }
     return (
         <div className='w-full'>
             <div className='bg-[#c80000] w-full text-white uppercase font-semibold relative'>
@@ -56,14 +66,14 @@ const Header_Category = () => {
                         </div>
                         <div className={`absolute lg:block transition-all text-slate-700 z-20 shadow-lg lg:right-10 top-[50px] w-full lg:w-[300px] right-0 ${show ? 'visible' : 'invisible'} `}>
                             <div className='p-3 bg-white'>
-                                <div className='flex'>
+                                <form onSubmit={search} className='flex'>
                                     <div className='w-[calc(100%-45px)] h-[40px]'>
-                                        <input type="text" placeholder='search' className='h-full w-full p-2 border border-slate-300 outline-none bg-slate-100' />
+                                        <input  value={state} required onChange={(e) => setState(e.target.value)} type="text" placeholder='search' className='h-full w-full p-2 border border-slate-300 outline-none bg-slate-100' />
                                     </div>
-                                    <div className='w-[45px] hover:bg-red-700 cursor-pointer h-[40px] flex justify-center items-center bg-red-600 text-white text-xl'>
+                                    <button className='w-[45px] hover:bg-red-700 cursor-pointer h-[40px] flex justify-center outline-none items-center bg-red-600 text-white text-xl'>
                                         <AiOutlineSearch />
-                                    </div>
-                                </div>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
